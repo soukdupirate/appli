@@ -13,10 +13,11 @@
 </head>
 <body>
 <img src="https://soukdupirate.github.io/appli/icon-512.png" alt="Souk du Pirate">
+<p style="margin:0;text-align:center;font-size:16px;line-height:1.5">Pour ajouter l'icône :<br><b>Partager</b> → <b>Sur l'écran d'accueil</b> → <b>Ajouter</b></p>
 <a id="go" href="https://script.google.com/macros/s/AKfycbxTTRFjtGI9Z-oiLErznQGbqAz_PlfHBwue7mh1KhfCITXfDtf-tp6r77h4wu_QiQAGfg/exec">Ouvrir l'appli</a>
 <script>
-/* adresse de l'icône : on entre directement dans l'appli */
-location.replace(document.getElementById('go').href);
+/* page pour ajouter l'icône : l'adresse enregistrée sur l'écran d'accueil devient /appli/, qui ouvre directement l'appli */
+if (history.replaceState) history.replaceState(null, '', '/appli/');
 </script>
 </body>
 </html>
