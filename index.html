@@ -8,21 +8,19 @@
 <meta name="apple-mobile-web-app-title" content="Souk du Pirate">
 <link rel="apple-touch-icon" href="https://soukdupirate.github.io/appli/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="https://soukdupirate.github.io/appli/favicon.png">
-<link rel="manifest" href="https://soukdupirate.github.io/appli/manifest.json">
 <meta name="theme-color" content="#ffffff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
 <style>body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;font-family:system-ui,sans-serif;background:#fff;color:#111}img{width:200px;height:200px}a{display:inline-block;padding:14px 22px;border-radius:12px;background:#111;color:#fff;text-decoration:none;font-weight:700}</style>
 </head>
 <body>
 <img src="https://soukdupirate.github.io/appli/icon-512.png" alt="Souk du Pirate">
 <a id="go" href="https://script.google.com/macros/s/AKfycbxTTRFjtGI9Z-oiLErznQGbqAz_PlfHBwue7mh1KhfCITXfDtf-tp6r77h4wu_QiQAGfg/exec">Ouvrir l'appli</a>
 <script>
-/* ouverte depuis l'icône de l'écran d'accueil : on entre directement dans l'appli, y compris quand on revient sur l'icône */
-function goApp(){ if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) location.replace(document.getElementById('go').href); }
-goApp();
-window.addEventListener('pageshow', goApp);
-document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') goApp(); });
+/* L'icône de l'écran d'accueil enregistre l'adresse « ?ouvrir=1 » : en l'ouvrant, on entre directement dans l'appli.
+   Sans ce paramètre (première visite), on affiche le logo pour pouvoir ajouter l'icône. */
+var appUrl = document.getElementById('go').href;
+var standalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+if (standalone || /[?&]ouvrir=1/.test(location.search)) location.replace(appUrl);
+else if (history.replaceState) history.replaceState(null, '', location.pathname.replace(/\/?$/, '/') + '?ouvrir=1');
 </script>
 </body>
 </html>
